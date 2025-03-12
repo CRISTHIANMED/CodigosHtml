@@ -1,0 +1,81 @@
+@font-face {
+    font-family: 'Chomsky';
+    src: url('font/Chomsky-8MOa2.otf') format('opentype');
+    font-weight: normal;
+}
+
+body {
+    text-align: center;
+    margin: 20px;
+    box-shadow: 1px 1px 5px 5px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+}
+
+h1 {
+    font-family: 'Chomsky';
+    font-weight: 100;
+    font-size: 80px;
+}
+
+nav{
+    padding: 10px 0px ;
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+}
+
+
+nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    padding: 0px;
+}
+
+nav li {
+    margin-right: 15px;
+}
+
+nav a {
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+h3{
+    border-bottom: 2px solid #888888;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: black;
+    padding: 10px 0px;
+    margin: 0;
+}
+
+.articulo {
+    color: #595959;
+    text-align: left;
+    padding: 30px 0px;
+}
+
+.articulo1{
+    margin: 0 auto;
+    column-count: 3;
+    /* Define 3 columnas */
+    column-gap: 20px;
+    /* Espacio entre columnas */
+    column-rule: 2px solid #ccc;
+}
+
+.articulo2{
+    margin: 0 auto;
+    column-count: 2;
+    /* Define 3 columnas */
+    column-gap: 20px;
+    /* Espacio entre columnas */
+    column-rule: 2px solid #ccc;
+}
+
+.articulo2 h3{
+    column-span: all;
+}

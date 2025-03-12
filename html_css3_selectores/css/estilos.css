@@ -1,0 +1,39 @@
+/*Selector etiqueta*/
+p{
+    background-color: gray; 
+}
+
+/*Selector clase*/
+.class{
+    color: red;
+}
+
+/*Selector identificador*/
+#ident{
+    color: green;
+}
+/*Selector universal*/
+*{
+    font-size: 25px;
+    font-style: italic;
+}
+
+/*Selector descendiente*/
+p a{
+    background-color: orange;
+}
+
+/*Selector combinacion*/
+h3, small {
+    color: blue;
+}
+
+/*Selector hijo*/
+div>span{
+    color: pink;
+}
+
+/*Selector adyacente*/
+span + small{
+    background-color: yellow;
+}

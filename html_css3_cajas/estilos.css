@@ -1,0 +1,25 @@
+.contenedor{
+    width: 500px;
+    height: 1500px;
+    background-color: lightblue;
+    position: relative; /*Se posiciona respecto a su ubicacion original*/
+}
+
+.caja1{
+    width: 100px;
+    height: 100px;
+    background-color: coral;
+    position: absolute; /*Se posiciona respecto al contenedor*/
+    top: 50px;
+    left: 100px;
+}
+
+.caja2{
+    width: 100px;
+    height: 100px;
+    background-color: green;
+    position: fixed; /*Se posiciona respecto al navegador*/
+    top: 200px;
+    left: 200px;
+}
+

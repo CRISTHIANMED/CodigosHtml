@@ -1,0 +1,37 @@
+.contenedor{
+    width: 80%;
+    margin: 0 auto;
+    column-count: 3; /*Define 3 Columnas*/
+    column-gap: 30px; /*Especio entre Columnas*/
+    column-rule: 2px solid #ccc; /*Linea de separacion entre columnas*/
+
+}
+
+img{
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+/*Estilo a cada parrafo*/
+.contenedor p{
+    text-align: justify; /*Justificar el Texto*/
+    margin-top: 15px;
+    line-height: 1.6;
+}
+
+.contenedor .highlight{
+    background-color: lightblue;
+    padding: 10px;
+    border-left: 5px solid #000;
+}
+
+.contenedor h2{
+    text-align: center;
+    color: #333;
+    margin-top: 40px;
+    font-size: 24px;
+    column-span: all;
+}
+
+
+

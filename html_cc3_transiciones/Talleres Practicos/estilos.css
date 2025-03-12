@@ -1,0 +1,73 @@
+body {
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    position: relative;
+    width: 300px;
+    height: 50px;
+}
+
+.pacman {
+    width: 40px;
+    height: 40px;
+    background: yellow;
+    border-radius: 50%;
+    position: absolute;
+    top: 5px;
+    left: 0;
+    transition: transform 0.3s;
+}
+
+.pacman:hover {
+    transform: scale(1.1);
+}
+
+.pacman::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: black;
+    clip-path: polygon(50% 50%, 100% 20%, 100% 80%);
+    transition: clip-path 0.3s;
+}
+
+.pacman:hover::before {
+    clip-path: polygon(50% 50%, 100% 0, 100% 100%);
+}
+
+.eye {
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    width: 8px;
+    height: 8px;
+    background: black;
+    border-radius: 50%;
+}
+
+.dots {
+    display: flex;
+    position: absolute;
+    top: 20px;
+    left: 50px;
+    gap: 20px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 50%;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.container:has(.pacman:hover) .dot {
+    opacity: 0;
+}

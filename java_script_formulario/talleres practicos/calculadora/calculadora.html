@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <link rel="stylesheet" href="estilos-calc.css">
+</head>
+<body>
+    <form action="" id="form-calc" name="form-calc" method="get">
+        <input type="number" id="numero1" name="numero1" placeholder="Ingrese el primer número" required>
+        <br>
+        <input type="number" id="numero2" name="numero2" placeholder="Ingrese el segundo número" required>
+        <br>
+        <button type="button" onclick="calcular('suma')">Sumar</button>
+        <button type="button" onclick="calcular('resta')">Restar</button>
+        <button type="button" onclick="calcular('multiplicacion')">Multiplicar</button>
+        <button type="button" onclick="calcular('division')">Dividir</button>
+        <button type="button" onclick="calcular('modulo')">Módulo</button>
+        <br>
+    </form>
+    <script defer src="sumar.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+/* Contenedor principal de las columnas */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    column-count: 3;
+    /* Define 3 columnas */
+    column-gap: 30px;
+    /* Espacio entre columnas */
+    column-rule: 2px solid #ccc;
+    /* Línea entre columnas */
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Estilo de cada párrafo */
+.container p {
+    text-align: justify;
+    /* Justificar el texto */
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+/* Estilo de las imágenes dentro del texto */
+.container img {
+    max-width: 100%;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+/* Estilo para resaltar ciertos párrafos en la primera columna */
+.container .highlight {
+    background-color: #f0f8ff;
+    padding: 10px;
+    border-left: 5px solid #000;
+}
+
+/* Estilo para los encabezados dentro de las columnas */
+.container h2 {
+    text-align: center;
+    color: #333;
+    margin-top: 40px;
+    font-size: 24px;
+}

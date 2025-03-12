@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taller Formulario</title>
+</head>
+
+<body>
+    <h1>Formulario de registro</h1>
+    <form form name="form1" method="get" action="#">
+        <table border="1">
+            <tr>
+                <td>
+                    <label>Nombre:</label>
+                </td>
+                <td>
+                    <input type="text" name="nombre" id="nombre">
+                    <label>
+                        F.Nac.:
+                        <input type="text" name="fnacimiento" id="fnacimiento">
+                    </label>
+                    <label>
+                        DNI:
+                        <input type="text" name="dni" id="dni">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Apellidos:</label>
+                </td>
+                <td>
+                    <input type="text" name="apellidos" id="apellidos" style="width: 596px">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Calle y número:</label>
+                </td>
+                <td>
+                    <input type="text" name="calleynumero" id="calleynumero" style="width: 596px">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Código Postal:</label>
+                </td>
+                <td>
+                    <input type="text" name="cpostal" id="cpostal">
+                    <label>
+                        Ciudad:
+                        <input type="text" name="ciudad" id="ciudad" style="width: 368px;">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Provincia:</label>
+                </td>
+                <td>
+                    <input type="text" name="provincia" id="provincia" style="width: 250px;">
+                    <label>
+                        Teléfono:
+                        <input type="text" name="telefono" id="telefono" style="width: 270px;">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Opción:</label>
+                </td>
+                <td>
+                    <select id="opciones" name="opcion" style="width: 150px;">
+                        <option value="opcion1">Opción 1</option>
+                        <option value="opcion2">Opción 2</option>
+                        <option value="opcion3">Opción 3</option>
+                    </select>
+                    <span>Escoja un opción</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Comentarios personales:</label>
+                </td>
+                <td>
+                    <textarea name="comentario" cols="79" rows="5"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label><b>Pulse aquí:</b></label>
+                </td>
+                <th>
+                    <input type="submit" value="Enviar datos">
+                    <input type="submit" value="Borrar los datos">
+                </th>
+            </tr>
+
+
+        </table>
+
+    </form>
+</body>
+
+</html>

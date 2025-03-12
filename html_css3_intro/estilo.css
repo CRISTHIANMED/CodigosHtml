@@ -1,0 +1,26 @@
+#s1 {
+    color: azure;
+    background-color: navy;
+    width: 300px;
+    text-align: center;
+    height: 50px;
+    padding: 10px;
+}
+#s2 {
+    color: azure;
+    background-color: rgb(8, 8, 24);
+    width: 300px;
+    text-align: center;
+    height: 50px;
+}
+#s3 {
+    color: azure;
+    background-color: rgb(5, 20, 14);
+    width: 300px;
+    text-align: center;
+    height: 50px;
+}
+.bloque{
+    margin: 20px;
+    border: 2px solid;
+}

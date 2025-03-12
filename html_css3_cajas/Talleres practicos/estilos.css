@@ -1,0 +1,44 @@
+.contenedor{
+    width: 500px;
+    height: 1500px;
+    background-color: lightblue;
+    position: relative; /*Se posiciona respecto a su ubicacion original*/
+}
+
+.caja1{
+    width: 100px;
+    height: 100px;
+    background-color: coral;
+    position: absolute; /*Se posiciona respecto al contenedor*/
+    top: 50px;
+    left: 100px;
+}
+
+.caja2{
+    width: 100px;
+    height: 100px;
+    background-color: green;
+    position: fixed; /*Se posiciona respecto al navegador*/
+    top: 120px;
+    left: 180px;
+    border-radius: 50%;
+}
+
+.caja3{
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+    position: absolute; 
+    top: 180px;
+    left: 250px;
+}
+
+.caja4{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    position: absolute; 
+    top: 250px;
+    left: 300px;
+    border-radius: 50%;
+}

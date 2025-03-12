@@ -1,0 +1,31 @@
+.grid-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 150px);
+}
+
+.grid-items{
+    min-height: 150px;
+}
+
+.grid-items-1{
+    background-color: salmon;
+}
+
+.grid-items-2{
+    background-color: beige;
+    grid-row: 1 / span 3;
+}
+
+.grid-items-3{
+    background-color: rgb(28, 160, 114);
+}
+.grid-items-4{
+    background-color: lightsalmon;
+}
+.grid-items-5{
+    background-color: yellowgreen;
+}
+.grid-items-6{
+    background-color: lightblue;
+}

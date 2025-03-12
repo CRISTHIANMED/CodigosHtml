@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+</head>
+
+<body>
+    <form name="form1" method="get" action="saludar.html">
+        <label>
+            <input type="text" name="nombre" id="nombre" maxlength="15" placeholder="Ingrese nombre"> <!--Caja de texto-->
+        </label>
+        <br>
+        <br>
+        <label>
+            Edad:
+            <input type="number" name="edad" id="edad">
+        </label>
+        <br>
+        <br>
+        <label>
+            Fecha de Nacimiento:
+            <input type="date" name="fnacimiento" id="fnacimiento">
+        </label>
+        <br>
+        <br>
+        <label>
+            Contraseña:
+            <input type="password" name="contrasena" id="contrasena">
+        </label>
+        <br>
+        <br>
+        <label>
+            Genero: <br>
+            <input type="radio" name="genero" value="F"> Femenino <br> <!--Mismo name selecciona 1-->
+            <input type="radio" name="genero" value="M"> Masculino <br> <!--Distinto name selecciona varios-->
+            <input type="radio" name="genero" value="NA"> No aplica
+
+        </label>
+        <br>
+        <br>
+        <label>
+            Intereses: <br>
+            <input type="checkbox" name="interes1" value="deportes"> Deportes <br>
+            <input type="checkbox" name="interes2" value="musica"> Música <br>
+            <input type="checkbox" name="interes3" value="artes"> Artes <br>
+            <input type="checkbox" name="interes4" value="matematicas"> Matemáticas <br>
+        </label>
+        <br>
+        <br>
+        <label>
+            Comentario: <br>
+            <textarea name="comentario" cols="50" rows="10">Ingrese un comentario!!</textarea>
+        </label>
+        <br>
+        <br>
+        <input type="submit" value="Enviar Formulario">
+    </form>
+</body>
+
+</html>
