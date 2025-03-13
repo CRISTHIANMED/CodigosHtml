@@ -10,6 +10,6 @@ function saludarHolaMundo() {
 //module.exports.Mundo = saludarHolaMundo;
 
 module.exports = {
-    saludo: saludar,
-    mundo: saludarHolaMundo
+    saludar,
+    saludarHolaMundo
 }
