@@ -1,0 +1,1 @@
+console.log(process.memoryUsage()); // Imprime un objeto con información del uso de memoria
