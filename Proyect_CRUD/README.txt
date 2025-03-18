@@ -1,3 +1,5 @@
+npm init --y
+
 Instalar dependencias
 npm install express-handlebars morgan mysql2
 
