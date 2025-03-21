@@ -1,0 +1,19 @@
+<div class="container"> 
+    <table>
+        <tr class="table-dark">
+            <td>ID</td>
+            <td>Nombre</td>
+            <td>Edad</td>
+        </tr>
+        {{#each}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{nombre}}</td>
+            <td>{{edad}}</td>
+        </tr>
+        {{/each}}
+        <tr>
+            <td colspan="3">Registro de estudiantes</td>
+        </tr>
+    </table>
+</div>

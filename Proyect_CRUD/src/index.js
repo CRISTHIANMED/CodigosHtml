@@ -4,6 +4,7 @@ import { engine } from 'express-handlebars'; // Handlebars template engine
 import { join, dirname } from 'path'; // Module to handle file paths
 import { fileURLToPath } from 'url'; // Converts the file URL into a system path
 import morgan from 'morgan'; // Middleware for logging HTTP requests
+import studentsRoute from './routes/students.routes.js';
 
 // Initialize the Express application
 const app = express();
@@ -34,6 +35,8 @@ app.get('/', (req, res) => {
     res.render("index")
     //res.json({ 'message': "Hello world, this is a bootcamp" }); // Send a JSON response
 });
+
+app.use(studentsRoute)
 
 // Sets the path of the publics file
 app.use(express.static(join(__dirname, "public")));
