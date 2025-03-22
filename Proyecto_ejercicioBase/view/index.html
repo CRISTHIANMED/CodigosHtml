@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Registro de Personas CRUD</title>
+   <link rel="stylesheet" href="../assets/css/registro.css">
+   <script defer src="../assets/js/registro.js"></script>
+</head>
+<body>
+   <div class="container">
+       <h1>Registro de Personas</h1>
+       <form id="personForm">
+            <div class="form-group">
+                <label for="identification">Identificación:</label>
+                <input type="text" id="identification" name="identification" required>
+            </div>
+           <div class="form-group">
+               <label for="firstName">Nombre:</label>
+               <input type="text" id="firstName" name="firstName" required>
+           </div>
+           <div class="form-group">
+               <label for="lastName">Apellido:</label>
+               <input type="text" id="lastName" name="lastName" required>
+           </div>
+           <div class="form-group">
+               <label for="email">Correo Electrónico:</label>
+               <input type="email" id="email" name="email" required>
+           </div>
+           <div class="form-group">
+               <label for="phone">Teléfono:</label>
+               <input type="tel" id="phone" name="phone" required>
+           </div>
+           <button type="submit" class="btn">Agregar Persona</button>
+       </form>
+
+       <h2>Lista de Personas</h2>
+       <table id="personTable">
+           <thead>
+               <tr>
+                   <th>Identificación</th>
+                   <th>Nombre</th>
+                   <th>Apellido</th>
+                   <th>Correo</th>
+                   <th>Teléfono</th>
+                   <th>Acciones</th>
+               </tr>
+           </thead>
+           <tbody>
+               <!-- Aquí se agregarán las filas de personas -->
+           </tbody>
+       </table>
+   </div>
+</body>
+</html>

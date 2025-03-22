@@ -1,0 +1,56 @@
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+/* Estilo para el banner */
+.banner {
+    height: 400px; /* Ajusta la altura del banner */
+    background: url('../img/banner.jpg') no-repeat center center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.banner h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.banner p {
+    font-size: 1.2rem;
+}
+
+/* Estilo para las tarjetas */
+.card {
+    border: none;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-image {
+    height: 200px; /* Ajusta la altura de las imágenes */
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Pie de página */
+footer {
+    font-size: 0.9rem;
+}
+
+/* Botones */
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}

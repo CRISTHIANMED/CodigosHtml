@@ -1,19 +1,22 @@
-<div class="container"> 
-    <table>
-        <tr class="table-dark">
-            <td>ID</td>
-            <td>Nombre</td>
-            <td>Edad</td>
-        </tr>
-        {{#each}}
-        <tr>
-            <td>{{id}}</td>
-            <td>{{nombre}}</td>
-            <td>{{edad}}</td>
-        </tr>
-        {{/each}}
-        <tr>
-            <td colspan="3">Registro de estudiantes</td>
-        </tr>
+<div class="container">
+    <table class="table text-center">
+        <thead>
+            <tr class="table-dark">
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Edad</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each students}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{nombre}}</td>
+                <td>{{age}}</td>
+                <td>Acciones</td>
+            </tr>
+            {{/each}}
+        </tbody>
     </table>
 </div>
