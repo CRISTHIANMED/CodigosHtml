@@ -1,12 +1,13 @@
-import {createPool} from 'mysql2/promise'
 
-const connection = createPool({
+
+import {createPool} from 'mysql2/promise';
+
+const conexion = createPool({
     host: 'localhost',
     port: '3306',
     user: 'root',
-    password: '',
-    database: 'prueba1'
+    password: "",
+    database: 'prueba01'
 });
 
-export default connection;
-
+export default conexion;

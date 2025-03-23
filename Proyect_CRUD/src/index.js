@@ -1,48 +1,48 @@
-// Import required modules
-import express from 'express'; // Framework to handle the web server
-import { engine } from 'express-handlebars'; // Handlebars template engine
-import { join, dirname } from 'path'; // Module to handle file paths
-import { fileURLToPath } from 'url'; // Converts the file URL into a system path
-import morgan from 'morgan'; // Middleware for logging HTTP requests
-import studentsRoute from './routes/students.routes.js';
+import express from 'express'
+import { engine } from 'express-handlebars';
+import{join,dirname} from 'path';
+import { fileURLToPath } from 'url';
+import morgan from 'morgan';
+import estudiantesRoutes from './routes/estudiante.routes.js'
 
-// Initialize the Express application
-const app = express();
-const __dirname = dirname(fileURLToPath(import.meta.url)); // Get the current directory of the file
+//inicializar
+const app=express(); 
+const __dirname= dirname(fileURLToPath(import.meta.url))
 
-// Server configuration
-app.set('port', process.env.PORT || 3000); // Use the environment-defined port or default to 3000
 
-// Template engine configuration
-app.set("views", join(__dirname, "views")); // Set the folder for views
+//configuracion
+app.set('port',process.env.PORT || 3000) //crea la asigancion del puerto en port
 
-app.engine(".hbs", engine({ // Configure the Handlebars template engine
-    defaultLayout: "main", // Define the main layout
-    layoutDir: join(app.get("views"), "layouts"), // Folder for layout templates
-    partialsDir: join(app.get("views"), "partials"), // Folder for reusable partial templates
-    extname: ".hbs" // Set the file extension for Handlebars templates
+//configuracion plantilla
+app.set("views", join(__dirname,'views')) //definiendo la ruta de los archivos de la plantilla
+
+app.engine('.hbs', engine({
+    defaultLayout: 'main',
+    layoutsDir: join(app.get('views'), 'layouts'),
+    partialsDir:join(app.get('views'), 'partials'),
+    extname:'.hbs'
 }));
+app.set('view engine','.hbs')
 
-app.set("view engine", ".hbs"); // Set Handlebars as the view engine
 
-// Middleware configuration
-app.use(morgan('dev')); // Log incoming HTTP requests in the "dev" format
-app.use(express.urlencoded({ extended: false })); // Parse URL-encoded data from forms
-app.use(express.json()); // For file Json type
+//configuracion de middelwares
+app.use(morgan('dev')); //ver todas las peticiones http que llegan desde nuestro servidor 
+app.use(express.urlencoded({extended:false}))//interfas de formualrios
+app.use(express.json()) // para archivos de tipo JSON
 
-// Define application routes
-app.get('/', (req, res) => {
-    res.render("index")
-    //res.json({ 'message': "Hello world, this is a bootcamp" }); // Send a JSON response
-});
 
-app.use(studentsRoute)
+//routes
+app.get('/',(req, res)=>{
+    res.render('index')
+})
 
-// Sets the path of the publics file
-app.use(express.static(join(__dirname, "public")));
+app.use(estudiantesRoutes);
 
-// Start the server
-app.listen(app.get('port'), () => {
-    console.log('Server listening on port', app.get('port')); // Log a message when the server is running
-});
+//Archivos publicos Public files
+app.use(express.static(join(__dirname,'public')))//Establece la ruta de los archivos pubicos
 
+//Run server
+
+
+app.listen(app.get('port'), ()=>
+    console.log('servidor escuchando por el puerto', app.get('port')));
