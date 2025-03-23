@@ -1,6 +1,20 @@
 document.addEventListener("DOMContentLoaded", async function() {
+    const token = sessionStorage.getItem("token");
+    const userId = sessionStorage.getItem("userId");
+
+    if (!token || !userId) {
+        alert("Debes iniciar sesión para acceder a esta página.");
+        window.location.href = "login.html";
+        return;
+    }
+
     try {
-        const response = await fetch("http://localhost:3000/movements");
+        // Filtramos movimientos por el usuario logeado
+        const response = await fetch(`http://localhost:3000/movements?userId=${userId}`, {
+            method: "GET",
+            headers: { Authorization: `Bearer ${token}` }
+        });
+
         if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
         
         const data = await response.json();
@@ -11,8 +25,6 @@ document.addEventListener("DOMContentLoaded", async function() {
         let gastos = 0;
         let listaMovimientos = document.getElementById("lista-movimientos");
         listaMovimientos.innerHTML = "";
-
-        let movimientosData = [];
 
         data.forEach(mov => {
             let monto = parseFloat(mov.monto);
@@ -30,12 +42,9 @@ document.addEventListener("DOMContentLoaded", async function() {
             li.className = `list-group-item ${tipo === "Ingreso" ? "text-success fw-bold" : "text-danger fw-bold"}`;
             li.innerText = `${tipo}: $${monto.toFixed(2)}`;
             listaMovimientos.appendChild(li);
-
-            movimientosData.push({ tipo, monto });
         });
 
         document.getElementById("saldo-total").innerText = `$${saldoTotal.toFixed(2)}`;
-
         generarGrafico(ingresos, gastos);
 
     } catch (error) {

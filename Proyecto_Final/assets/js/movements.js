@@ -1,20 +1,38 @@
 let isEditing = false;
 let editingId = null;
 
-// Función para cargar los movimientos
+document.addEventListener("DOMContentLoaded", function () {
+    const token = sessionStorage.getItem("token");
+    
+    if (!token) {
+        window.location.href = "login.html";
+    } else {
+        loadMovements();
+    }
+});
+
+// Función para cargar movimientos
 async function loadMovements() {
+    const token = sessionStorage.getItem("token");
+    if (!token) return console.error("Token de autenticación no encontrado.");
+
     try {
-        const response = await fetch("http://localhost:3000/movements");
+        const response = await fetch("http://localhost:3000/movements", {
+            method: "GET",
+            headers: { Authorization: `Bearer ${token}` },
+        });
+
         if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
 
         const data = await response.json();
         const tableBody = document.getElementById("movementsTableBody");
-        tableBody.innerHTML = ""; // Limpiar antes de agregar nuevos datos
+
+        if (!tableBody) return console.error("No se encontró la tabla en el DOM.");
+
+        tableBody.innerHTML = "";
 
         data.forEach(movement => {
             const row = document.createElement("tr");
-
-            // 🔥 Aplicar color según el tipo de movimiento
             const colorClass = movement.tipo === "Ingreso" ? "text-success" : "text-danger";
 
             row.innerHTML = `
@@ -31,7 +49,6 @@ async function loadMovements() {
             tableBody.appendChild(row);
         });
 
-        // Reasignar eventos después de cargar los datos
         document.querySelectorAll(".delete-btn").forEach(button => {
             button.addEventListener("click", () => deleteMovement(button.dataset.id));
         });
@@ -41,7 +58,7 @@ async function loadMovements() {
                 const row = event.target.closest("tr");
                 const id = button.dataset.id;
                 const descripcion = row.children[0].textContent;
-                const monto = row.children[1].textContent;
+                const monto = parseFloat(row.children[1].textContent.replace(/[^\d.-]/g, "")); 
                 const tipo = row.children[2].textContent;
 
                 editMovement(id, descripcion, monto, tipo);
@@ -53,33 +70,21 @@ async function loadMovements() {
     }
 }
 
-// Función para eliminar un movimiento
-async function deleteMovement(id) {
-    if (!confirm("¿Seguro que quieres eliminar este movimiento?")) return;
-
-    try {
-        const response = await fetch(`http://localhost:3000/movements/${id}`, { method: "DELETE" });
-
-        if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
-
-        alert("Movimiento eliminado correctamente.");
-        loadMovements(); // Recargar lista después de eliminar
-    } catch (error) {
-        console.error("Error eliminando movimiento:", error);
-    }
-}
-
 // Función para editar un movimiento
 function editMovement(id, descripcion, monto, tipo) {
     document.getElementById("description").value = descripcion;
     document.getElementById("amount").value = monto;
     document.getElementById("type").value = tipo;
-    
-    // Activamos la bandera de edición
+
     isEditing = true;
     editingId = id;
 
-    document.getElementById("submitButton").textContent = "Actualizar Movimiento";
+    const submitButton = document.getElementById("submitButton");
+    if (submitButton) {
+        submitButton.textContent = "Actualizar Movimiento";
+    } else {
+        console.error("Botón submitButton no encontrado en el DOM.");
+    }
 }
 
 // Evento para agregar o actualizar un movimiento
@@ -87,10 +92,10 @@ document.getElementById("movementForm").addEventListener("submit", async (event)
     event.preventDefault();
 
     const descripcion = document.getElementById("description").value;
-    const monto = parseFloat(document.getElementById("amount").value); // Convertir a número
+    const monto = parseFloat(document.getElementById("amount").value);
     const tipo = document.getElementById("type").value;
+    const token = sessionStorage.getItem("token");
 
-    // Validación: Monto no puede ser negativo
     if (isNaN(monto) || monto <= 0) {
         alert("El monto debe ser un número positivo.");
         return;
@@ -109,28 +114,52 @@ document.getElementById("movementForm").addEventListener("submit", async (event)
 
         const response = await fetch(url, {
             method: method,
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ descripcion, monto, tipo })
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ descripcion, monto, tipo }),
         });
 
         if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
 
         alert(isEditing ? "Movimiento actualizado." : "Movimiento agregado.");
 
-        // Restablecer estado después de agregar o actualizar
         isEditing = false;
         editingId = null;
         document.getElementById("movementForm").reset();
-        document.getElementById("submitButton").textContent = "Agregar Movimiento";
-        loadMovements();
+        
+        const submitButton = document.getElementById("submitButton");
+        if (submitButton) {
+            submitButton.textContent = "Agregar Movimiento";
+        }
 
+        loadMovements();
     } catch (error) {
-        console.error("Error guardando movimiento:", error);
+        console.error("Error al guardar el movimiento:", error);
     }
 });
 
+// Función para eliminar un movimiento con autenticación
+async function deleteMovement(id) {
+    if (!confirm("¿Seguro que quieres eliminar este movimiento?")) return;
 
+    const token = sessionStorage.getItem("token"); // Obtener el token
 
-document.addEventListener("DOMContentLoaded", loadMovements);
+    try {
+        const response = await fetch(`http://localhost:3000/movements/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
 
+        if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
 
+        alert("Movimiento eliminado correctamente.");
+        loadMovements(); // Recargar lista después de eliminar
+    } catch (error) {
+        console.error("Error eliminando movimiento:", error);
+        alert("Ocurrió un error al eliminar el movimiento.");
+    }
+}

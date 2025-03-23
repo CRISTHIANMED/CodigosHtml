@@ -4,20 +4,27 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    const response = await fetch("http://localhost:3000/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password })
-    });
+    try {
+        const response = await fetch("http://localhost:3000/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password })
+        });
 
-    const data = await response.json();
+        const data = await response.json();
 
-    if (response.ok) {
-        localStorage.setItem("token", data.token); // Guardar el token en localStorage
-        localStorage.setItem("userId", data.id); // Guardar el ID del usuario
-        alert("Inicio de sesión exitoso.");
-        window.location.href = "resume.html";
-    } else {
-        alert(data.message);
+        if (response.ok) {
+            sessionStorage.setItem("token", data.token);
+            sessionStorage.setItem("userId", data.userId); // Guardar ID del usuario
+            sessionStorage.setItem("user", JSON.stringify(data.user)); // Guardar como string
+
+            alert("Inicio de sesión exitoso.");
+            window.location.href = "resume.html"; // Redirigir al panel principal
+        } else {
+            alert(data.message);
+        }
+    } catch (error) {
+        console.error("Error en el login:", error);
+        alert("Error en el servidor.");
     }
 });
