@@ -1,22 +1,24 @@
 let isEditing = false;
 let editingId = null;
 
+// Evento que se ejecuta cuando el DOM ha sido completamente cargado
 document.addEventListener("DOMContentLoaded", function () {
-    const token = sessionStorage.getItem("token");
+    const token = sessionStorage.getItem("token"); // Obtiene el token de autenticación almacenado en sessionStorage
     
     if (!token) {
-        window.location.href = "login.html";
+        window.location.href = "login.html"; // Redirige al usuario a la página de login si no hay token
     } else {
-        loadMovements();
+        loadMovements(); // Carga los movimientos si el usuario está autenticado
     }
 });
 
-// Función para cargar movimientos
+// Función para cargar movimientos desde el backend
 async function loadMovements() {
     const token = sessionStorage.getItem("token");
     if (!token) return console.error("Token de autenticación no encontrado.");
 
     try {
+        // Solicitud GET para obtener los movimientos del usuario autenticado
         const response = await fetch("http://localhost:3000/movements", {
             method: "GET",
             headers: { Authorization: `Bearer ${token}` },
@@ -24,13 +26,14 @@ async function loadMovements() {
 
         if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
 
-        const data = await response.json();
-        const tableBody = document.getElementById("movementsTableBody");
+        const data = await response.json(); // Convierte la respuesta en JSON
+        const tableBody = document.getElementById("movementsTableBody"); // Obtiene el cuerpo de la tabla donde se mostrarán los datos
 
         if (!tableBody) return console.error("No se encontró la tabla en el DOM.");
 
-        tableBody.innerHTML = "";
+        tableBody.innerHTML = ""; // Limpia la tabla antes de cargar nuevos datos
 
+        // Itera sobre los datos recibidos y los agrega a la tabla
         data.forEach(movement => {
             const row = document.createElement("tr");
             const colorClass = movement.tipo === "Ingreso" ? "text-success" : "text-danger";
@@ -49,19 +52,21 @@ async function loadMovements() {
             tableBody.appendChild(row);
         });
 
+        // Agrega eventos a los botones de eliminar
         document.querySelectorAll(".delete-btn").forEach(button => {
             button.addEventListener("click", () => deleteMovement(button.dataset.id));
         });
 
+        // Agrega eventos a los botones de editar
         document.querySelectorAll(".edit-btn").forEach(button => {
             button.addEventListener("click", (event) => {
-                const row = event.target.closest("tr");
+                const row = event.target.closest("tr"); // Encuentra la fila padre del botón
                 const id = button.dataset.id;
                 const descripcion = row.children[0].textContent;
-                const monto = parseFloat(row.children[1].textContent.replace(/[^\d.-]/g, "")); 
+                const monto = parseFloat(row.children[1].textContent.replace(/[^\d.-]/g, "")); // Convierte el monto a número
                 const tipo = row.children[2].textContent;
 
-                editMovement(id, descripcion, monto, tipo);
+                editMovement(id, descripcion, monto, tipo); // Llama a la función de edición
             });
         });
 
@@ -70,7 +75,7 @@ async function loadMovements() {
     }
 }
 
-// Función para editar un movimiento
+// Función para editar un movimiento y cargar los valores en el formulario
 function editMovement(id, descripcion, monto, tipo) {
     document.getElementById("description").value = descripcion;
     document.getElementById("amount").value = monto;
@@ -79,6 +84,7 @@ function editMovement(id, descripcion, monto, tipo) {
     isEditing = true;
     editingId = id;
 
+    // Cambia el texto del botón para indicar que se actualizará un movimiento
     const submitButton = document.getElementById("submitButton");
     if (submitButton) {
         submitButton.textContent = "Actualizar Movimiento";
@@ -89,12 +95,12 @@ function editMovement(id, descripcion, monto, tipo) {
 
 // Evento para agregar o actualizar un movimiento
 document.getElementById("movementForm").addEventListener("submit", async (event) => {
-    event.preventDefault();
+    event.preventDefault(); // Evita que el formulario se recargue
 
     const descripcion = document.getElementById("description").value;
     const monto = parseFloat(document.getElementById("amount").value);
     const tipo = document.getElementById("type").value;
-    const token = sessionStorage.getItem("token");
+    const token = sessionStorage.getItem("token"); // Obtiene el token de autenticación
 
     if (isNaN(monto) || monto <= 0) {
         alert("El monto debe ser un número positivo.");
@@ -106,10 +112,10 @@ document.getElementById("movementForm").addEventListener("submit", async (event)
 
         if (isEditing) {
             method = "PUT";
-            url = `http://localhost:3000/movements/${editingId}`;
+            url = `http://localhost:3000/movements/${editingId}`; // Ruta para actualizar
         } else {
             method = "POST";
-            url = "http://localhost:3000/movements";
+            url = "http://localhost:3000/movements"; // Ruta para agregar
         }
 
         const response = await fetch(url, {
@@ -129,12 +135,13 @@ document.getElementById("movementForm").addEventListener("submit", async (event)
         editingId = null;
         document.getElementById("movementForm").reset();
         
+        // Restablece el texto del botón
         const submitButton = document.getElementById("submitButton");
         if (submitButton) {
             submitButton.textContent = "Agregar Movimiento";
         }
 
-        loadMovements();
+        loadMovements(); // Recarga la lista de movimientos
     } catch (error) {
         console.error("Error al guardar el movimiento:", error);
     }
@@ -144,7 +151,7 @@ document.getElementById("movementForm").addEventListener("submit", async (event)
 async function deleteMovement(id) {
     if (!confirm("¿Seguro que quieres eliminar este movimiento?")) return;
 
-    const token = sessionStorage.getItem("token"); // Obtener el token
+    const token = sessionStorage.getItem("token"); // Obtiene el token de autenticación
 
     try {
         const response = await fetch(`http://localhost:3000/movements/${id}`, {
@@ -157,7 +164,7 @@ async function deleteMovement(id) {
         if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
 
         alert("Movimiento eliminado correctamente.");
-        loadMovements(); // Recargar lista después de eliminar
+        loadMovements(); // Recarga la lista después de eliminar
     } catch (error) {
         console.error("Error eliminando movimiento:", error);
         alert("Ocurrió un error al eliminar el movimiento.");
